@@ -39,6 +39,20 @@ describe("Password must be longer than 8 characters", () => {
   });
 });
 
+describe("Colour must be selected", () => {
+  test("passes when a colour is selected", () => {
+    renderHtml("index.html");
+    $("#colour").val("blue");
+    expect($("#colour")[0].checkValidity()).toBe(true);
+  });
+
+  test("do not pass when a colour is not selected", () => {
+    renderHtml("index.html");
+    $("#colour").val("");
+    expect($("#colour")[0].checkValidity()).toBe(false);
+  });
+});
+
 function renderHtml(filepath) {
   const html = fs.readFileSync(filepath, { encoding: "utf-8" });
   $("html").html(html);
