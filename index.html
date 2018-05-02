@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <meta charset="UTF-8"/>
+    <meta charset="UTF-8" />
     <title>Form validation problem</title>
     <style>
         /*
@@ -9,6 +10,7 @@
             Page prettiness
             -------------------------------------------------------------------
         */
+
         body {
             font-family: sans-serif;
             line-height: 1.5;
@@ -17,7 +19,8 @@
             margin: 2em;
         }
 
-        h1, h3 {
+        h1,
+        h3 {
             color: #576774;
         }
 
@@ -30,6 +33,7 @@
             Form styles
             -------------------------------------------------------------------
         */
+
         form {
             background: #fff;
             padding: 1em 1.25em;
@@ -40,10 +44,12 @@
         label {
             vertical-align: middle;
         }
+
         /*
             Note: Don't change font-family on password inputs,
             unless you want tiny •••• bullets :)
         */
+
         input[type='text'],
         input[type='submit'] {
             font-family: sans-serif;
@@ -102,7 +108,7 @@
 
 
 
-        label + input[type=checkbox] {
+        label+input[type=checkbox] {
             margin-left: 1em;
         }
 
@@ -115,7 +121,7 @@
             padding: 0;
         }
 
-        fieldset + fieldset {
+        fieldset+fieldset {
             border-top: solid 1px #eee;
         }
 
@@ -136,15 +142,15 @@
                 <input id='field' type='text' value='foo'>
             </p>
         */
-        .error > input,
-        .error > label {
+
+        .error>input,
+        .error>label {
             color: red;
         }
 
-        .error > input {
+        .error>input {
             border-color: red;
         }
-
     </style>
 </head>
 
@@ -157,7 +163,7 @@
                 <label class='label' for='email'>
                     Email
                 </label>
-                <input type='text' id='email' name='email'>
+                <input type='email' id='email' name='email'>
             </p>
             <p>
                 <label class='label' for='password'>
@@ -189,7 +195,7 @@
 
                 <input type='checkbox' name='animal' value='bear' id='bear'>
                 <label for='bear'>
-                     Bear
+                    Bear
                 </label>
 
                 <input type='checkbox' name='animal' value='tiger' id='tiger'>
@@ -199,12 +205,12 @@
 
                 <input type='checkbox' name='animal' value='snake' id='snake'>
                 <label for='snake'>
-                     Snake
+                    Snake
                 </label>
 
                 <input type='checkbox' name='animal' value='donkey' id='donkey'>
                 <label for='donkey'>
-                     Donkey
+                    Donkey
                 </label>
 
             </p>
@@ -222,4 +228,5 @@
         </fieldset>
     </form>
 </body>
+
 </html>
