@@ -1,10 +1,10 @@
 {
   "name": "form-validation-problem",
   "version": "1.0.0",
-  "main": "index.js",
   "repository": "https://github.com/michelmattos/form-validation-problem.git",
   "author": "Michel Mattos <mattos.michel@gmail.com>",
   "license": "MIT",
+  "private": true,
   "scripts": {
     "test": "jest",
     "test:watch": "jest --watch"
