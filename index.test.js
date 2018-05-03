@@ -1,6 +1,10 @@
-'use strict';
 const fs = require('fs');
 const $ = require('jquery');
+
+function renderHtml(filepath) {
+    const html = fs.readFileSync(filepath, { encoding: 'utf-8' });
+    $('html').html(html);
+}
 
 test('it passes', () => {
     expect(true).toBe(true);
@@ -54,8 +58,3 @@ describe('Colour must be selected', () => {
         expect($('#colour')[0].checkValidity()).toBe(false);
     });
 });
-
-function renderHtml(filepath) {
-    const html = fs.readFileSync(filepath, { encoding: 'utf-8' });
-    $('html').html(html);
-}
