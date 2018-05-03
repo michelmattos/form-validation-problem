@@ -1,28 +1,29 @@
 {
-  "name": "form-validation-problem",
-  "version": "1.0.0",
-  "repository": "https://github.com/michelmattos/form-validation-problem.git",
-  "author": "Michel Mattos <mattos.michel@gmail.com>",
-  "license": "MIT",
-  "private": true,
-  "scripts": {
-    "test": "jest",
-    "test:watch": "jest --watch"
-  },
-  "eslintConfig": {
-    "extends": "plugin:springload/prettier"
-  },
-  "devDependencies": {
-    "eslint": "3",
-    "eslint-plugin-springload": "^2.2.0",
-    "jest": "^22.4.3",
-    "jquery": "^3.3.1",
-    "prettier": "^1.12.1",
-    "webpack": "^4.6.0",
-    "webpack-cli": "^2.1.2"
-  },
-  "dependencies": {
-    "react": "^16.3.2",
-    "react-dom": "^16.3.2"
-  }
+    "name": "form-validation-problem",
+    "version": "1.0.0",
+    "repository": "https://github.com/michelmattos/form-validation-problem.git",
+    "author": "Michel Mattos <mattos.michel@gmail.com>",
+    "license": "MIT",
+    "private": true,
+    "scripts": {
+        "test": "jest",
+        "test:watch": "jest --watch",
+        "build": "webpack --mode=production"
+    },
+    "eslintConfig": {
+        "extends": "plugin:springload/prettier"
+    },
+    "devDependencies": {
+        "eslint": "3",
+        "eslint-plugin-springload": "^2.2.0",
+        "jest": "^22.4.3",
+        "jquery": "^3.3.1",
+        "prettier": "^1.12.1",
+        "webpack": "^4.6.0",
+        "webpack-cli": "^2.1.2"
+    },
+    "dependencies": {
+        "react": "^16.3.2",
+        "react-dom": "^16.3.2"
+    }
 }
