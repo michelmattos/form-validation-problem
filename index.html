@@ -169,7 +169,10 @@
                 <label class='label' for='password'>
                     Password
                 </label>
+                <!--[if IE]>
                 <input class='error' type='password' id='password' name='username' pattern='.{9,}'>
+                <![endif]-->
+                <input class='error' type='password' id='password' name='username' minlength='9'>
             </p>
         </fieldset>
 
