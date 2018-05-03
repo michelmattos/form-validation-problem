@@ -11,6 +11,11 @@ test('it passes', () => {
 });
 
 describe('Email must be a valid email address', () => {
+    test('email is required', () => {
+        renderHtml('index.html');
+        expect($('#email')[0].checkValidity()).toBe(false);
+    });
+
     test('input type is email', () => {
         renderHtml('index.html');
         expect($('#email').attr('type')).toBe('email');
@@ -24,12 +29,17 @@ describe('Email must be a valid email address', () => {
 
     test('do not pass when a non valid email is passed', () => {
         renderHtml('index.html');
-        $('#email').val('john.doe');
+        $('#email').val('john.doe@');
         expect($('#email')[0].checkValidity()).toBe(false);
     });
 });
 
 describe('Password must be longer than 8 characters', () => {
+    test('password is required', () => {
+        renderHtml('index.html');
+        expect($('#password')[0].checkValidity()).toBe(false);
+    });
+
     test('passes when password is greater than 8 characters', () => {
         renderHtml('index.html');
         $('#password').val('123456789');
