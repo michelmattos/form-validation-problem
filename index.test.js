@@ -32,7 +32,9 @@ describe('Password must be longer than 8 characters', () => {
         expect($('#password')[0].checkValidity()).toBe(true);
     });
 
-    test('do not pass when password is less or equal than 8 characters', () => {
+    // JSDom doesn't support "minlength" attr
+    // See: https://github.com/jsdom/jsdom/blob/b3d823f3118816f962a78ecf43dc64f829f7767c/test/web-platform-tests/to-run.yaml#L509
+    test.skip('do not pass when password is less or equal than 8 characters', () => {
         renderHtml('index.html');
         $('#password').val('12345678');
         expect($('#password')[0].checkValidity()).toBe(false);
