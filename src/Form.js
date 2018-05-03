@@ -1,42 +1,49 @@
 // @flow
 import React from 'react';
+import type { FormFields, FormErrors } from './validateForm';
 
-type State = {
-    formTouched: boolean,
-    isEmailValid: boolean,
+type Props = {
+    onValidate: (fields: FormFields) => FormErrors,
 };
 
-class App extends React.Component<{}, State> {
+type State = {
+    errors: {
+        email?: string,
+    },
+    email?: string,
+};
+
+class Form extends React.Component<Props, State> {
     state = {
-        formTouched: false,
-        isEmailValid: false,
+        errors: {},
+        email: undefined,
     };
 
-    validateEmail = (evt: SyntheticInputEvent<>) => {
-        const isEmailValid = evt.target.validity.valid;
-        this.setState({ isEmailValid, formTouched: true });
-    };
+    validateEmail = (evt: SyntheticInputEvent<>) =>
+        this.props.onValidate({ email: evt.target.value });
 
     render() {
-        const { isEmailValid, formTouched } = this.state;
-        const emailErrorClassName = !formTouched || isEmailValid ? '' : 'error';
-        const isSubmitDisabled = !formTouched && !isEmailValid;
+        const { errors, email = '' } = this.state;
+        const disableSubmit = Object.keys(errors).length > 0;
         return (
             <form>
                 <h1>Fill out this awesome form</h1>
                 <fieldset>
                     <h3>Your details</h3>
-                    <p className={emailErrorClassName}>
+                    <p className={errors.email ? 'error' : ''}>
                         <label className="label" htmlFor="email">
                             Email
                         </label>
                         <input
+                            value={email}
+                            onChange={this.validateEmail}
                             onBlur={this.validateEmail}
                             type="email"
                             id="email"
                             name="email"
                             required
                         />
+                        {errors.email && <span>{errors.email}</span>}
                     </p>
                 </fieldset>
                 <fieldset>
@@ -44,7 +51,7 @@ class App extends React.Component<{}, State> {
                         <input
                             type="submit"
                             value="Create account"
-                            disabled={isSubmitDisabled}
+                            disabled={disableSubmit}
                         />
                     </p>
                 </fieldset>
@@ -53,4 +60,4 @@ class App extends React.Component<{}, State> {
     }
 }
 
-export default App;
+export default Form;
