@@ -13,19 +13,30 @@
         "build": "webpack --mode=production"
     },
     "eslintConfig": {
-        "extends": "plugin:springload/prettier"
+        "extends": [
+            "plugin:springload/prettier",
+            "plugin:flowtype/recommended"
+        ],
+        "parser": "babel-eslint",
+        "plugins": ["flowtype"],
+        "rules": {
+            "strict": 0
+        }
     },
     "jest": {
         "setupTestFrameworkScriptFile": "<rootDir>/setupTest.js"
     },
     "devDependencies": {
         "babel-core": "^6.26.3",
+        "babel-eslint": "^8.2.3",
         "babel-loader": "^7.1.4",
+        "babel-plugin-transform-class-properties": "^6.24.1",
         "babel-preset-env": "^1.6.1",
         "babel-preset-react": "^6.24.1",
         "enzyme": "^3.3.0",
         "enzyme-adapter-react-16": "^1.1.1",
-        "eslint": "3",
+        "eslint": "4",
+        "eslint-plugin-flowtype": "^2.46.3",
         "eslint-plugin-springload": "^2.2.0",
         "flow-bin": "^0.71.0",
         "jest": "^22.4.3",
