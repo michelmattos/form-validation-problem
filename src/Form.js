@@ -80,7 +80,7 @@ class Form extends React.Component<Props, State> {
             ).length > 0;
 
         return (
-            <form>
+            <form method="post" action="">
                 <h1>Fill out this awesome form</h1>
                 <fieldset>
                     <h3>Your details</h3>
@@ -96,6 +96,7 @@ class Form extends React.Component<Props, State> {
                             id="email"
                             name="email"
                             required
+                            autoFocus
                         />
                         {errors.email && (
                             <span data-id="email-error">{errors.email}</span>
