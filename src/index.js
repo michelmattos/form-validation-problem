@@ -1,5 +1,6 @@
 import React from 'react';
 import { render } from 'react-dom';
 import Form from './Form';
+import validateForm from './validateForm';
 
-render(<Form />, document.body);
+render(<Form onValidate={validateForm} />, document.body);

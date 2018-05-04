@@ -10,6 +10,14 @@ function createEvent({ value }) {
     return { target: { value } };
 }
 
+test('Submit button should be initially disabled', () => {
+    const errors = { email: '' };
+    const props = createProps({ onValidate: () => errors });
+    const wrapper = shallow(<Form {...props} />);
+
+    expect(wrapper.find('input[type="submit"]').prop('disabled')).toBe(true);
+});
+
 describe('For email field', () => {
     test('Should call onValidate on change', () => {
         const props = createProps({ onValidate: jest.fn(() => ({})) });

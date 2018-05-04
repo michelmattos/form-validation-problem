@@ -21,18 +21,21 @@ class Form extends React.Component<Props, State> {
     };
 
     validateEmail = (evt: SyntheticInputEvent<>) => {
-        const errors = this.props.onValidate({ email: evt.target.value });
-        this.setState({ errors });
+        const email = evt.target.value;
+        const errors = this.props.onValidate({ email });
+        this.setState({ errors, email });
     };
 
     validatePassword = (evt: SyntheticInputEvent<>) => {
-        const errors = this.props.onValidate({ password: evt.target.value });
-        this.setState({ errors });
+        const password = evt.target.value;
+        const errors = this.props.onValidate({ password });
+        this.setState({ errors, password });
     };
 
     validateColour = (evt: SyntheticInputEvent<>) => {
-        const errors = this.props.onValidate({ colour: evt.target.value });
-        this.setState({ errors });
+        const colour = evt.target.value;
+        const errors = this.props.onValidate({ colour });
+        this.setState({ errors, colour });
     };
 
     validateAnimals = (evt: SyntheticInputEvent<>) => {
@@ -44,15 +47,16 @@ class Form extends React.Component<Props, State> {
         else animals = [...animals, selectedAnimal];
 
         const errors = this.props.onValidate({ animals });
-        this.setState({ errors });
+        this.setState({ errors, animals });
     };
 
     validateTigerType = (evt: SyntheticInputEvent<>) => {
+        const tigerType = evt.target.value;
         const errors = this.props.onValidate({
             animals: this.state.animals,
-            tigerType: evt.target.value,
+            tigerType,
         });
-        this.setState({ errors });
+        this.setState({ errors, tigerType });
     };
 
     render() {
@@ -64,7 +68,17 @@ class Form extends React.Component<Props, State> {
             animals = [],
             tigerType = '',
         } = this.state;
-        const disableSubmit = Object.keys(errors).length > 0;
+        const disableSubmit =
+            Object.keys(
+                this.props.onValidate({
+                    email,
+                    password,
+                    colour,
+                    animals,
+                    tigerType,
+                }),
+            ).length > 0;
+
         return (
             <form>
                 <h1>Fill out this awesome form</h1>
