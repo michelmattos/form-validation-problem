@@ -96,7 +96,6 @@ class Form extends React.Component<Props, State> {
                             id="email"
                             name="email"
                             required
-                            autoFocus
                         />
                         {errors.email && (
                             <span data-id="email-error">{errors.email}</span>
