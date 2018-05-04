@@ -22,6 +22,10 @@ const isEmailInvalid = (email: string) => {
     return !emailPattern.test(email);
 };
 
+/**
+ * Validate the form fields. You can exclude fields that you don't want
+ * to validate.
+ */
 const validateForm = (fields: FormFields): FormErrors => {
     const { email, password, colour, animals, tigerType } = fields;
     const errors = {};
