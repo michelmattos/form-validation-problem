@@ -6,24 +6,64 @@ type Props = {
     onValidate: (fields: FormFields) => FormErrors,
 };
 
-type State = {
-    errors: {
-        email?: string,
-    },
-    email?: string,
+type State = FormFields & {
+    errors: FormErrors,
 };
 
 class Form extends React.Component<Props, State> {
     state = {
         errors: {},
         email: undefined,
+        password: undefined,
+        colour: undefined,
+        animals: undefined,
+        tigerType: undefined,
     };
 
-    validateEmail = (evt: SyntheticInputEvent<>) =>
-        this.props.onValidate({ email: evt.target.value });
+    validateEmail = (evt: SyntheticInputEvent<>) => {
+        const errors = this.props.onValidate({ email: evt.target.value });
+        this.setState({ errors });
+    };
+
+    validatePassword = (evt: SyntheticInputEvent<>) => {
+        const errors = this.props.onValidate({ password: evt.target.value });
+        this.setState({ errors });
+    };
+
+    validateColour = (evt: SyntheticInputEvent<>) => {
+        const errors = this.props.onValidate({ colour: evt.target.value });
+        this.setState({ errors });
+    };
+
+    validateAnimals = (evt: SyntheticInputEvent<>) => {
+        const selectedAnimal = evt.target.value;
+        let animals = this.state.animals || [];
+
+        if (animals.includes(evt.target.value))
+            animals = animals.filter(animal => animal !== selectedAnimal);
+        else animals = [...animals, selectedAnimal];
+
+        const errors = this.props.onValidate({ animals });
+        this.setState({ errors });
+    };
+
+    validateTigerType = (evt: SyntheticInputEvent<>) => {
+        const errors = this.props.onValidate({
+            animals: this.state.animals,
+            tigerType: evt.target.value,
+        });
+        this.setState({ errors });
+    };
 
     render() {
-        const { errors, email = '' } = this.state;
+        const {
+            errors,
+            email = '',
+            password = '',
+            colour = '',
+            animals = [],
+            tigerType = '',
+        } = this.state;
         const disableSubmit = Object.keys(errors).length > 0;
         return (
             <form>
@@ -43,7 +83,119 @@ class Form extends React.Component<Props, State> {
                             name="email"
                             required
                         />
-                        {errors.email && <span>{errors.email}</span>}
+                        {errors.email && (
+                            <span data-id="email-error">{errors.email}</span>
+                        )}
+                    </p>
+                    <p className={errors.password ? 'error' : ''}>
+                        <label className="label" htmlFor="password">
+                            Password
+                        </label>
+                        <input
+                            value={password}
+                            onChange={this.validatePassword}
+                            onBlur={this.validatePassword}
+                            type="password"
+                            id="password"
+                            name="username"
+                            minLength="9"
+                            required
+                        />
+                        {errors.password && (
+                            <span data-id="password-error">
+                                {errors.password}
+                            </span>
+                        )}
+                    </p>
+                </fieldset>
+                <fieldset>
+                    <h3>Your animal</h3>
+                    <p className={errors.colour ? 'error' : ''}>
+                        <label className="label" htmlFor="colour">
+                            Colour
+                        </label>
+                        <select
+                            value={colour}
+                            name="colour"
+                            onChange={this.validateColour}
+                            onBlur={this.validateColour}
+                            id="colour"
+                            required
+                        >
+                            <option value="">Choose colour</option>
+                            <option value="blue">Blue</option>
+                            <option value="green">Green</option>
+                            <option value="red">Red</option>
+                            <option value="black">Black</option>
+                            <option value="brown">Brown</option>
+                        </select>
+                        {errors.colour && (
+                            <span data-id="colour-error">{errors.colour}</span>
+                        )}
+                    </p>
+                    <p className={errors.animals ? 'error' : ''}>
+                        <span className="label">Animal</span>
+                        {errors.animals && (
+                            <span data-id="animal-error">{errors.animals}</span>
+                        )}
+
+                        <input
+                            checked={animals.includes('bear')}
+                            onChange={this.validateAnimals}
+                            type="checkbox"
+                            name="animal"
+                            value="bear"
+                            id="bear"
+                        />
+                        <label htmlFor="bear">Bear</label>
+
+                        <input
+                            checked={animals.includes('tiger')}
+                            onChange={this.validateAnimals}
+                            type="checkbox"
+                            name="animal"
+                            value="tiger"
+                            id="tiger"
+                        />
+                        <label htmlFor="tiger">Tiger</label>
+
+                        <input
+                            checked={animals.includes('snake')}
+                            onChange={this.validateAnimals}
+                            type="checkbox"
+                            name="animal"
+                            value="snake"
+                            id="snake"
+                        />
+                        <label htmlFor="snake">Snake</label>
+
+                        <input
+                            checked={animals.includes('donkey')}
+                            onChange={this.validateAnimals}
+                            type="checkbox"
+                            name="animal"
+                            value="donkey"
+                            id="donkey"
+                        />
+                        <label htmlFor="donkey">Donkey</label>
+                    </p>
+                    <p className={errors.tigerType ? 'error' : ''}>
+                        <label className="label" htmlFor="tiger_type">
+                            Type of tiger
+                        </label>
+                        <input
+                            value={tigerType}
+                            onChange={this.validateTigerType}
+                            onBlur={this.validateTigerType}
+                            type="text"
+                            name="tiger_type"
+                            id="tiger_type"
+                        />
+                        {errors.tigerType && (
+                            <span data-id="tiger-type-error">
+                                {errors.tigerType}
+                            </span>
+                        )}
                     </p>
                 </fieldset>
                 <fieldset>
