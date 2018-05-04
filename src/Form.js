@@ -149,9 +149,6 @@ class Form extends React.Component<Props, State> {
                     </p>
                     <p className={errors.animals ? 'error' : ''}>
                         <span className="label">Animal</span>
-                        {errors.animals && (
-                            <span data-id="animal-error">{errors.animals}</span>
-                        )}
 
                         <input
                             checked={animals.includes('bear')}
@@ -192,6 +189,10 @@ class Form extends React.Component<Props, State> {
                             id="donkey"
                         />
                         <label htmlFor="donkey">Donkey</label>
+
+                        {errors.animals && (
+                            <span data-id="animal-error">{errors.animals}</span>
+                        )}
                     </p>
                     <p className={errors.tigerType ? 'error' : ''}>
                         <label className="label" htmlFor="tiger_type">
