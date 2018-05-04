@@ -58,12 +58,12 @@ test('Should not return an error when 2 or more animals are selected', () => {
     expect(validateForm(fields)).toEqual({});
 });
 
-test('Should return an error when "Tiger" is selected and type of tiger is empty', () => {
-    const fields = { animals: ['Tiger', 'cat'], tigerType: '' };
+test('Should return an error when "tiger" is selected and type of tiger is empty', () => {
+    const fields = { animals: ['tiger', 'cat'], tigerType: '' };
     expect(validateForm(fields)).toEqual({ tigerType: "Can't be empty" });
 });
 
-test('Should not return an error when "Tiger" is selected and type of tiger is not empty', () => {
-    const fields = { animals: ['Tiger', 'cat'], tigerType: 'Snow tiger' };
+test('Should not return an error when "tiger" is selected and type of tiger is not empty', () => {
+    const fields = { animals: ['tiger', 'cat'], tigerType: 'Snow tiger' };
     expect(validateForm(fields)).toEqual({});
 });

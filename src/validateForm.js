@@ -50,7 +50,7 @@ const validateForm = (fields: FormFields): FormErrors => {
             errors.animals = 'At least two animals must be chosen';
 
         if (tigerType !== undefined) {
-            if (tigerType.length === 0 && animals.includes('Tiger'))
+            if (tigerType.length === 0 && animals.includes('tiger'))
                 errors.tigerType = "Can't be empty";
         }
     }
