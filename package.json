@@ -6,6 +6,7 @@
     "license": "MIT",
     "private": true,
     "scripts": {
+        "start": "yarn build && serve .",
         "flow": "flow",
         "lint": "eslint src/**",
         "test": "jest",
@@ -42,6 +43,7 @@
         "jest": "^22.4.3",
         "jquery": "^3.3.1",
         "prettier": "^1.12.1",
+        "serve": "^6.5.6",
         "webpack": "^4.6.0",
         "webpack-cli": "^2.1.2"
     },
