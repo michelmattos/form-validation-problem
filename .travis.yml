@@ -30,10 +30,6 @@ before_script:
 jobs:
   include:
     - stage: test
-      script:
-        - yarn flow
-        - yarn lint
-      script:
-        - yarn test
-      script:
-        - yarn test:e2e:all
+      script: yarn flow & yarn lint
+      script: yarn test
+      script: yarn test:e2e:all
