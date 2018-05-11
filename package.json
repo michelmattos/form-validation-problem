@@ -13,6 +13,7 @@
         "test:watch": "jest --watch",
         "test:e2e": "testcafe chrome e2e/ --app 'yarn start'",
         "test:e2e:headless": "testcafe chrome:headless e2e/ --app 'yarn start'",
+        "test:e2e:all": "testcafe all e2e/ --app 'yarn start'",
         "build": "webpack --mode=production"
     },
     "eslintConfig": {
