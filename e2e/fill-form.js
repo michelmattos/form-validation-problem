@@ -11,19 +11,49 @@ test('User can fill the form', async t => {
         // Type a password
         .typeText('#password', '123456789')
 
-        // Select one colour
+        // Select a colour
         .click('#colour')
         .click('option[value="blue"]')
 
-        // Check two animals
+        // Check 2 animals
         .click('#bear')
         .click('#snake')
 
-        // There shouldn't be any error
+        // Expect to see no errors
         .expect(Selector('.field-error').exists)
-        .notOk('The form should not have errors')
+        .notOk()
 
-        // Submit button should be enabled
+        // Expect the submit button to be enabled
         .expect(Selector('input[type="submit"]').hasAttribute('disabled'))
-        .notOk('Submit button should not be disabled');
+        .notOk();
+});
+
+test('User can see all the error messages', async t => {
+    await t
+        // Force an error for email
+        .click('#email')
+        .pressKey('tab')
+
+        // Force an error for password
+        .click('#password')
+        .pressKey('tab')
+
+        // Force an error for colour
+        .click('#colour')
+        .pressKey('esc tab')
+
+        // Force an error for animals
+        .click('#tiger')
+
+        // Force an error for type of tiger
+        .click('#tiger_type')
+        .pressKey('tab')
+
+        // Expect to see 5 error messages
+        .expect(Selector('.field-error').count)
+        .eql(5)
+
+        // Expect the submit button to be disabled
+        .expect(Selector('input[type="submit"]').hasAttribute('disabled'))
+        .ok();
 });
