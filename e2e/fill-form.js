@@ -17,7 +17,7 @@ test('User can fill the form', async t => {
 
         // Check two animals
         .click('#bear')
-        .click('#snake')
+        //.click('#snake')
 
         // There shouldn't be any error
         .expect(Selector('.field-error').exists)
