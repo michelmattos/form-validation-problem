@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { mount } from 'enzyme';
 import Form from '../Form';
 
 function createProps(overrides = {}) {
@@ -13,7 +13,7 @@ function createEvent({ value }) {
 test('Submit button should be initially disabled', () => {
     const errors = { email: '' };
     const props = createProps({ onValidate: () => errors });
-    const wrapper = shallow(<Form {...props} />);
+    const wrapper = mount(<Form {...props} />);
 
     expect(wrapper.find('input[type="submit"]').prop('disabled')).toBe(true);
 });
@@ -21,7 +21,7 @@ test('Submit button should be initially disabled', () => {
 describe('For email field', () => {
     test('Should call onValidate on change', () => {
         const props = createProps({ onValidate: jest.fn(() => ({})) });
-        const wrapper = shallow(<Form {...props} />);
+        const wrapper = mount(<Form {...props} />);
 
         const event = createEvent({ value: 'john.doe@example.com' });
         wrapper.find('#email').simulate('change', event);
@@ -32,7 +32,7 @@ describe('For email field', () => {
     });
     test('Should call onValidate on blur', () => {
         const props = createProps({ onValidate: jest.fn(() => ({})) });
-        const wrapper = shallow(<Form {...props} />);
+        const wrapper = mount(<Form {...props} />);
 
         const event = createEvent({ value: 'john.doe@example.com' });
         wrapper.find('#email').simulate('blur', event);
@@ -46,19 +46,17 @@ describe('For email field', () => {
         const props = createProps({
             onValidate: () => errors,
         });
-        const wrapper = shallow(<Form {...props} />);
+        const wrapper = mount(<Form {...props} />);
 
         const event = createEvent({ value: '' });
         wrapper.find('#email').simulate('change', event);
 
-        expect(wrapper.find('[data-id="email-error"]').text()).toBe(
-            errors.email,
-        );
+        expect(wrapper.find('.field-error').text()).toBe(errors.email);
     });
     test('Should hide the error when valid', () => {
         const errors = {};
         const props = createProps({ onValidate: () => errors });
-        const wrapper = shallow(<Form {...props} />);
+        const wrapper = mount(<Form {...props} />);
 
         const event = createEvent({ value: '' });
         wrapper.find('#email').simulate('change', event);
@@ -68,7 +66,7 @@ describe('For email field', () => {
     test('Should add "error" className when invalid', () => {
         const errors = { email: 'Error!' };
         const props = createProps({ onValidate: () => errors });
-        const wrapper = shallow(<Form {...props} />);
+        const wrapper = mount(<Form {...props} />);
 
         const event = createEvent({ value: '' });
         wrapper.find('#email').simulate('change', event);
@@ -83,7 +81,7 @@ describe('For email field', () => {
     test('Should remove "error" className when valid', () => {
         const errors = {};
         const props = createProps({ onValidate: () => errors });
-        const wrapper = shallow(<Form {...props} />);
+        const wrapper = mount(<Form {...props} />);
 
         const event = createEvent({ value: '' });
         wrapper.find('#email').simulate('change', event);
@@ -98,7 +96,7 @@ describe('For email field', () => {
     test('Should disable submit button when invalid', () => {
         const errors = { email: 'Error!' };
         const props = createProps({ onValidate: () => errors });
-        const wrapper = shallow(<Form {...props} />);
+        const wrapper = mount(<Form {...props} />);
 
         const event = createEvent({ value: '' });
         wrapper.find('#email').simulate('change', event);
@@ -110,7 +108,7 @@ describe('For email field', () => {
     test('Should enable submit button when valid', () => {
         const errors = {};
         const props = createProps({ onValidate: () => errors });
-        const wrapper = shallow(<Form {...props} />);
+        const wrapper = mount(<Form {...props} />);
 
         const event = createEvent({ value: '' });
         wrapper.find('#email').simulate('change', event);
@@ -124,7 +122,7 @@ describe('For email field', () => {
 describe('For password field', () => {
     test('Should call onValidate on change', () => {
         const props = createProps({ onValidate: jest.fn(() => ({})) });
-        const wrapper = shallow(<Form {...props} />);
+        const wrapper = mount(<Form {...props} />);
 
         const event = createEvent({ value: '123456' });
         wrapper.find('#password').simulate('change', event);
@@ -135,7 +133,7 @@ describe('For password field', () => {
     });
     test('Should call onValidate on blur', () => {
         const props = createProps({ onValidate: jest.fn(() => ({})) });
-        const wrapper = shallow(<Form {...props} />);
+        const wrapper = mount(<Form {...props} />);
 
         const event = createEvent({ value: '123456' });
         wrapper.find('#password').simulate('blur', event);
@@ -147,19 +145,17 @@ describe('For password field', () => {
     test('Should show the error when invalid', () => {
         const errors = { password: 'Error!' };
         const props = createProps({ onValidate: () => errors });
-        const wrapper = shallow(<Form {...props} />);
+        const wrapper = mount(<Form {...props} />);
 
         const event = createEvent({ value: '' });
         wrapper.find('#password').simulate('change', event);
 
-        expect(wrapper.find('[data-id="password-error"]').text()).toBe(
-            errors.password,
-        );
+        expect(wrapper.find('.field-error').text()).toBe(errors.password);
     });
     test('Should hide the error when valid', () => {
         const errors = {};
         const props = createProps({ onValidate: () => errors });
-        const wrapper = shallow(<Form {...props} />);
+        const wrapper = mount(<Form {...props} />);
 
         const event = createEvent({ value: '' });
         wrapper.find('#password').simulate('change', event);
@@ -169,7 +165,7 @@ describe('For password field', () => {
     test('Should add "error" className when invalid', () => {
         const errors = { password: 'Error!' };
         const props = createProps({ onValidate: () => errors });
-        const wrapper = shallow(<Form {...props} />);
+        const wrapper = mount(<Form {...props} />);
 
         const event = createEvent({ value: '' });
         wrapper.find('#password').simulate('change', event);
@@ -184,7 +180,7 @@ describe('For password field', () => {
     test('Should remove "error" className when valid', () => {
         const errors = {};
         const props = createProps({ onValidate: () => errors });
-        const wrapper = shallow(<Form {...props} />);
+        const wrapper = mount(<Form {...props} />);
 
         const event = createEvent({ value: '' });
         wrapper.find('#password').simulate('change', event);
@@ -199,7 +195,7 @@ describe('For password field', () => {
     test('Should disable submit button when invalid', () => {
         const errors = { password: 'Error!' };
         const props = createProps({ onValidate: () => errors });
-        const wrapper = shallow(<Form {...props} />);
+        const wrapper = mount(<Form {...props} />);
 
         const event = createEvent({ value: '' });
         wrapper.find('#password').simulate('change', event);
@@ -211,7 +207,7 @@ describe('For password field', () => {
     test('Should enable submit button when valid', () => {
         const errors = {};
         const props = createProps({ onValidate: () => errors });
-        const wrapper = shallow(<Form {...props} />);
+        const wrapper = mount(<Form {...props} />);
 
         const event = createEvent({ value: '' });
         wrapper.find('#password').simulate('change', event);
@@ -225,7 +221,7 @@ describe('For password field', () => {
 describe('For colour field', () => {
     test('Should call onValidate on change', () => {
         const props = createProps({ onValidate: jest.fn(() => ({})) });
-        const wrapper = shallow(<Form {...props} />);
+        const wrapper = mount(<Form {...props} />);
 
         const event = createEvent({ value: 'red' });
         wrapper.find('#colour').simulate('change', event);
@@ -236,7 +232,7 @@ describe('For colour field', () => {
     });
     test('Should call onValidate on blur', () => {
         const props = createProps({ onValidate: jest.fn(() => ({})) });
-        const wrapper = shallow(<Form {...props} />);
+        const wrapper = mount(<Form {...props} />);
 
         const event = createEvent({ value: 'red' });
         wrapper.find('#colour').simulate('blur', event);
@@ -248,19 +244,17 @@ describe('For colour field', () => {
     test('Should show the error when invalid', () => {
         const errors = { colour: 'Error!' };
         const props = createProps({ onValidate: () => errors });
-        const wrapper = shallow(<Form {...props} />);
+        const wrapper = mount(<Form {...props} />);
 
         const event = createEvent({ value: '' });
         wrapper.find('#colour').simulate('change', event);
 
-        expect(wrapper.find('[data-id="colour-error"]').text()).toBe(
-            errors.colour,
-        );
+        expect(wrapper.find('.field-error').text()).toBe(errors.colour);
     });
     test('Should hide the error when valid', () => {
         const errors = {};
         const props = createProps({ onValidate: () => errors });
-        const wrapper = shallow(<Form {...props} />);
+        const wrapper = mount(<Form {...props} />);
 
         const event = createEvent({ value: '' });
         wrapper.find('#colour').simulate('change', event);
@@ -270,7 +264,7 @@ describe('For colour field', () => {
     test('Should add "error" className when invalid', () => {
         const errors = { colour: 'Error!' };
         const props = createProps({ onValidate: () => errors });
-        const wrapper = shallow(<Form {...props} />);
+        const wrapper = mount(<Form {...props} />);
 
         const event = createEvent({ value: '' });
         wrapper.find('#colour').simulate('change', event);
@@ -285,7 +279,7 @@ describe('For colour field', () => {
     test('Should remove "error" className when valid', () => {
         const errors = {};
         const props = createProps({ onValidate: () => errors });
-        const wrapper = shallow(<Form {...props} />);
+        const wrapper = mount(<Form {...props} />);
 
         const event = createEvent({ value: '' });
         wrapper.find('#colour').simulate('change', event);
@@ -300,7 +294,7 @@ describe('For colour field', () => {
     test('Should disable submit button when invalid', () => {
         const errors = { colour: 'Error!' };
         const props = createProps({ onValidate: () => errors });
-        const wrapper = shallow(<Form {...props} />);
+        const wrapper = mount(<Form {...props} />);
 
         const event = createEvent({ value: '' });
         wrapper.find('#colour').simulate('change', event);
@@ -312,7 +306,7 @@ describe('For colour field', () => {
     test('Should enable submit button when valid', () => {
         const errors = {};
         const props = createProps({ onValidate: () => errors });
-        const wrapper = shallow(<Form {...props} />);
+        const wrapper = mount(<Form {...props} />);
 
         const event = createEvent({ value: '' });
         wrapper.find('#colour').simulate('change', event);
@@ -329,7 +323,7 @@ describe('For animal checkboxes', () => {
             const props = createProps({
                 onValidate: jest.fn(() => ({})),
             });
-            const wrapper = shallow(<Form {...props} />);
+            const wrapper = mount(<Form {...props} />);
 
             const event = createEvent({ value: animal });
             wrapper.find(`#${animal}`).simulate('change', event);
@@ -341,7 +335,7 @@ describe('For animal checkboxes', () => {
         test('Should show the error when invalid', () => {
             const errors = { animals: 'Error!' };
             const props = createProps({ onValidate: () => errors });
-            const wrapper = shallow(<Form {...props} />);
+            const wrapper = mount(<Form {...props} />);
 
             const event = createEvent({ value: animal });
             wrapper.find(`#${animal}`).simulate('change', event);
@@ -353,7 +347,7 @@ describe('For animal checkboxes', () => {
         test('Should hide the error when valid', () => {
             const errors = {};
             const props = createProps({ onValidate: () => errors });
-            const wrapper = shallow(<Form {...props} />);
+            const wrapper = mount(<Form {...props} />);
 
             const event = createEvent({ value: animal });
             wrapper.find(`#${animal}`).simulate('change', event);
@@ -365,7 +359,7 @@ describe('For animal checkboxes', () => {
         test('Should add "error" className when invalid', () => {
             const errors = { animals: 'Error!' };
             const props = createProps({ onValidate: () => errors });
-            const wrapper = shallow(<Form {...props} />);
+            const wrapper = mount(<Form {...props} />);
 
             const event = createEvent({ value: animal });
             wrapper.find(`#${animal}`).simulate('change', event);
@@ -380,7 +374,7 @@ describe('For animal checkboxes', () => {
         test('Should remove "error" className when valid', () => {
             const errors = {};
             const props = createProps({ onValidate: () => errors });
-            const wrapper = shallow(<Form {...props} />);
+            const wrapper = mount(<Form {...props} />);
 
             const event = createEvent({ value: animal });
             wrapper.find('#colour').simulate('change', event);
@@ -395,7 +389,7 @@ describe('For animal checkboxes', () => {
         test('Should disable submit button when invalid', () => {
             const errors = { animals: 'Error!' };
             const props = createProps({ onValidate: () => errors });
-            const wrapper = shallow(<Form {...props} />);
+            const wrapper = mount(<Form {...props} />);
 
             const event = createEvent({ value: animal });
             wrapper.find(`#${animal}`).simulate('change', event);
@@ -407,7 +401,7 @@ describe('For animal checkboxes', () => {
         test('Should enable submit button when valid', () => {
             const errors = {};
             const props = createProps({ onValidate: () => errors });
-            const wrapper = shallow(<Form {...props} />);
+            const wrapper = mount(<Form {...props} />);
 
             const event = createEvent({ value: animal });
             wrapper.find(`#${animal}`).simulate('change', event);
@@ -422,7 +416,7 @@ describe('For animal checkboxes', () => {
 describe('For type of tiger field', () => {
     test('Should call onValidate on change', () => {
         const props = createProps({ onValidate: jest.fn(() => ({})) });
-        const wrapper = shallow(<Form {...props} />);
+        const wrapper = mount(<Form {...props} />);
 
         const event = createEvent({ value: 'snow tiger' });
         wrapper.find('#tiger_type').simulate('change', event);
@@ -434,7 +428,7 @@ describe('For type of tiger field', () => {
     });
     test('Should call onValidate on blur', () => {
         const props = createProps({ onValidate: jest.fn(() => ({})) });
-        const wrapper = shallow(<Form {...props} />);
+        const wrapper = mount(<Form {...props} />);
 
         const event = createEvent({ value: 'snow tiger' });
         wrapper.find('#tiger_type').simulate('blur', event);
@@ -447,7 +441,7 @@ describe('For type of tiger field', () => {
     test('Should show the error when invalid', () => {
         const errors = { tigerType: 'Error!' };
         const props = createProps({ onValidate: () => errors });
-        const wrapper = shallow(<Form {...props} />);
+        const wrapper = mount(<Form {...props} />);
 
         const event = createEvent({ value: '' });
         wrapper.find('#tiger_type').simulate('change', event);
@@ -459,7 +453,7 @@ describe('For type of tiger field', () => {
     test('Should hide the error when valid', () => {
         const errors = {};
         const props = createProps({ onValidate: () => errors });
-        const wrapper = shallow(<Form {...props} />);
+        const wrapper = mount(<Form {...props} />);
 
         const event = createEvent({ value: '' });
         wrapper.find('#tiger_type').simulate('change', event);
@@ -471,7 +465,7 @@ describe('For type of tiger field', () => {
     test('Should add "error" className when invalid', () => {
         const errors = { tigerType: 'Error!' };
         const props = createProps({ onValidate: () => errors });
-        const wrapper = shallow(<Form {...props} />);
+        const wrapper = mount(<Form {...props} />);
 
         const event = createEvent({ value: '' });
         wrapper.find('#tiger_type').simulate('change', event);
@@ -486,7 +480,7 @@ describe('For type of tiger field', () => {
     test('Should remove "error" className when valid', () => {
         const errors = {};
         const props = createProps({ onValidate: () => errors });
-        const wrapper = shallow(<Form {...props} />);
+        const wrapper = mount(<Form {...props} />);
 
         const event = createEvent({ value: '' });
         wrapper.find('#tiger_type').simulate('change', event);
@@ -501,7 +495,7 @@ describe('For type of tiger field', () => {
     test('Should disable submit button when invalid', () => {
         const errors = { tigerType: 'Error!' };
         const props = createProps({ onValidate: () => errors });
-        const wrapper = shallow(<Form {...props} />);
+        const wrapper = mount(<Form {...props} />);
 
         const event = createEvent({ value: '' });
         wrapper.find('#tiger_type').simulate('change', event);
@@ -513,7 +507,7 @@ describe('For type of tiger field', () => {
     test('Should enable submit button when valid', () => {
         const errors = {};
         const props = createProps({ onValidate: () => errors });
-        const wrapper = shallow(<Form {...props} />);
+        const wrapper = mount(<Form {...props} />);
 
         const event = createEvent({ value: '' });
         wrapper.find('#tiger_type').simulate('change', event);

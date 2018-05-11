@@ -1,6 +1,7 @@
 // @flow
 import React from 'react';
 import type { FormFields, FormErrors } from './validateForm';
+import FormField from './FormField';
 
 type Props = {
     onValidate: (fields: FormFields) => FormErrors,
@@ -84,10 +85,7 @@ class Form extends React.Component<Props, State> {
                 <h1>Fill out this awesome form</h1>
                 <fieldset>
                     <h3>Your details</h3>
-                    <p className={errors.email ? 'error' : ''}>
-                        <label className="label" htmlFor="email">
-                            Email
-                        </label>
+                    <FormField label="Email" error={errors.email}>
                         <input
                             value={email}
                             onChange={this.validateEmail}
@@ -97,14 +95,8 @@ class Form extends React.Component<Props, State> {
                             name="email"
                             required
                         />
-                        {errors.email && (
-                            <span data-id="email-error">{errors.email}</span>
-                        )}
-                    </p>
-                    <p className={errors.password ? 'error' : ''}>
-                        <label className="label" htmlFor="password">
-                            Password
-                        </label>
+                    </FormField>
+                    <FormField label="Password" error={errors.password}>
                         <input
                             value={password}
                             onChange={this.validatePassword}
@@ -115,19 +107,11 @@ class Form extends React.Component<Props, State> {
                             minLength="9"
                             required
                         />
-                        {errors.password && (
-                            <span data-id="password-error">
-                                {errors.password}
-                            </span>
-                        )}
-                    </p>
+                    </FormField>
                 </fieldset>
                 <fieldset>
                     <h3>Your animal</h3>
-                    <p className={errors.colour ? 'error' : ''}>
-                        <label className="label" htmlFor="colour">
-                            Colour
-                        </label>
+                    <FormField label="Colour" error={errors.colour}>
                         <select
                             value={colour}
                             name="colour"
@@ -143,10 +127,7 @@ class Form extends React.Component<Props, State> {
                             <option value="black">Black</option>
                             <option value="brown">Brown</option>
                         </select>
-                        {errors.colour && (
-                            <span data-id="colour-error">{errors.colour}</span>
-                        )}
-                    </p>
+                    </FormField>
                     <p className={errors.animals ? 'error' : ''}>
                         <span className="label">Animal</span>
 
