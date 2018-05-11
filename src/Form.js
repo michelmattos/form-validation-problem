@@ -22,42 +22,64 @@ class Form extends React.Component<Props, State> {
     };
 
     validateEmail = (evt: SyntheticInputEvent<>) => {
-        const email = evt.target.value;
-        const errors = this.props.onValidate({ email });
-        this.setState({ errors, email });
+        const value = evt.target.value;
+        const { email, ...otherErrors } = this.state.errors;
+        const errors = {
+            ...otherErrors,
+            ...this.props.onValidate({ email: value }),
+        };
+        this.setState({ errors, email: value });
     };
 
     validatePassword = (evt: SyntheticInputEvent<>) => {
-        const password = evt.target.value;
-        const errors = this.props.onValidate({ password });
-        this.setState({ errors, password });
+        const value = evt.target.value;
+        const { password, ...otherErrors } = this.state.errors;
+        const errors = {
+            ...otherErrors,
+            ...this.props.onValidate({ password: value }),
+        };
+        this.setState({ errors, password: value });
     };
 
     validateColour = (evt: SyntheticInputEvent<>) => {
-        const colour = evt.target.value;
-        const errors = this.props.onValidate({ colour });
-        this.setState({ errors, colour });
+        const value = evt.target.value;
+        const { colour, ...otherErrors } = this.state.errors;
+        const errors = {
+            ...otherErrors,
+            ...this.props.onValidate({ colour: value }),
+        };
+        this.setState({ errors, colour: value });
     };
 
     validateAnimals = (evt: SyntheticInputEvent<>) => {
-        const selectedAnimal = evt.target.value;
-        let animals = this.state.animals || [];
+        const value = evt.target.value;
+        let selectedAnimals = this.state.animals || [];
 
-        if (animals.includes(evt.target.value))
-            animals = animals.filter(animal => animal !== selectedAnimal);
-        else animals = [...animals, selectedAnimal];
+        if (selectedAnimals.includes(evt.target.value))
+            selectedAnimals = selectedAnimals.filter(
+                animal => animal !== value,
+            );
+        else selectedAnimals = [...selectedAnimals, value];
 
-        const errors = this.props.onValidate({ animals });
-        this.setState({ errors, animals });
+        const { animals, ...otherErrors } = this.state.errors;
+        const errors = {
+            ...otherErrors,
+            ...this.props.onValidate({ animals: selectedAnimals }),
+        };
+        this.setState({ errors, animals: selectedAnimals });
     };
 
     validateTigerType = (evt: SyntheticInputEvent<>) => {
-        const tigerType = evt.target.value;
-        const errors = this.props.onValidate({
-            animals: this.state.animals,
-            tigerType,
-        });
-        this.setState({ errors, tigerType });
+        const value = evt.target.value;
+        const { tigerType, ...otherErrors } = this.state.errors;
+        const errors = {
+            ...otherErrors,
+            ...this.props.onValidate({
+                animals: this.state.animals,
+                tigerType: value,
+            }),
+        };
+        this.setState({ errors, tigerType: value });
     };
 
     render() {
@@ -172,7 +194,12 @@ class Form extends React.Component<Props, State> {
                         <label htmlFor="donkey">Donkey</label>
 
                         {errors.animals && (
-                            <span data-id="animal-error">{errors.animals}</span>
+                            <span
+                                className="field-error"
+                                data-id="animal-error"
+                            >
+                                {errors.animals}
+                            </span>
                         )}
                     </p>
                     <p className={errors.tigerType ? 'error' : ''}>
@@ -188,7 +215,10 @@ class Form extends React.Component<Props, State> {
                             id="tiger_type"
                         />
                         {errors.tigerType && (
-                            <span data-id="tiger-type-error">
+                            <span
+                                className="field-error"
+                                data-id="tiger-type-error"
+                            >
                                 {errors.tigerType}
                             </span>
                         )}
