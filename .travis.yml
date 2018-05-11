@@ -27,8 +27,13 @@ before_script:
   - yarn start &
   - sleep 3
 
-script:
-  - yarn flow
-  - yarn lint
-  - yarn test
-  - yarn test:e2e:all
+jobs:
+  include:
+    - stage: test
+      script:
+        - yarn flow
+        - yarn lint
+      script:
+        - yarn test
+      script:
+        - yarn test:e2e:all
